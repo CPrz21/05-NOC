@@ -1,9 +1,10 @@
-import { Server } from './presentation/server';
+import { envs } from './config/plugins/envs.plugin';
 
 (() => {
   Main();
 })();
 
 function Main() {
-  Server.start();
+  // Server.start();
+  console.log(envs.PORT);
 }
