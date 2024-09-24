@@ -5,9 +5,9 @@ import { LogEntity, LogSeverityLevel } from '../../domain/entities/log.entity';
 
 export class FileSystemDatasource implements LogDatasource {
   private readonly logPath = 'logs/';
-  private readonly allLogsPath = 'logs/logs-all';
-  private readonly mediumLogsPath = 'logs/logs-medium';
-  private readonly highLogsPath = 'logs/logs-high';
+  private readonly allLogsPath = 'logs/logs-all.log';
+  private readonly mediumLogsPath = 'logs/logs-medium.log';
+  private readonly highLogsPath = 'logs/logs-high.log';
 
   constructor() {
     this.createLogsFiles();

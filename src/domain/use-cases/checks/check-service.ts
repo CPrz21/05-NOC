@@ -5,6 +5,8 @@ interface CheckServiceUseCase {
   execute(url: string): Promise<Boolean>;
 }
 
+const fileOrigin = 'check-service.ts';
+
 type SuccessCallback = () => void;
 
 type ErrorCallback = (error: string) => void;
@@ -24,7 +26,12 @@ export class CheckService implements CheckServiceUseCase {
         throw new Error('Error on check service ' + url);
       }
 
-      const log = new LogEntity(LogSeverityLevel.low, `${url} is up`);
+      const log = new LogEntity({
+        level: LogSeverityLevel.low,
+        message: `${url} is up`,
+        createdAt: new Date(),
+        origin: fileOrigin,
+      });
 
       this.logRepository.saveLog(log);
 
@@ -35,7 +42,12 @@ export class CheckService implements CheckServiceUseCase {
       const errorMessage = `${url} is not ok. ${error}`;
 
       this.logRepository.saveLog(
-        new LogEntity(LogSeverityLevel.high, errorMessage)
+        new LogEntity({
+          level: LogSeverityLevel.high,
+          message: errorMessage,
+          createdAt: new Date(),
+          origin: fileOrigin,
+        })
       );
 
       this.errorCallback(error + '');
